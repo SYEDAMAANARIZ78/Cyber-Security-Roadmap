@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Roadmap + Free Resources</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #020b14;
+    --bg2: #04111f;
+    --panel: #061828;
+    --border: #0d3a5c;
+    --neon: #00f5d4;
+    --neon2: #00b4d8;
+    --accent: #f72585;
+    --gold: #ffd60a;
+    --purple: #7b2fff;
+    --green: #39ff14;
+    --text: #c8e6f5;
+    --muted: #4a7a99;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,212,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,212,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .page-wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* HEADER */
+  header { text-align: center; margin-bottom: 50px; }
+  .header-badge {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--neon);
+    border: 1px solid var(--neon);
+    padding: 4px 16px;
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+    animation: pulse-border 3s ease-in-out infinite;
+  }
+  @keyframes pulse-border {
+    0%,100% { box-shadow: 0 0 5px var(--neon), inset 0 0 5px rgba(0,245,212,0.1); }
+    50% { box-shadow: 0 0 20px var(--neon), inset 0 0 15px rgba(0,245,212,0.2); }
+  }
+  h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(26px, 4.5vw, 50px);
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #00f5d4 0%, #00b4d8 40%, #f72585 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .header-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon), var(--accent), var(--neon2), transparent);
+    margin-top: 28px;
+    animation: line-flow 4s linear infinite;
+  }
+  @keyframes line-flow { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+  /* GLOBAL PLATFORMS STRIP */
+  .global-strip {
+    background: linear-gradient(135deg, rgba(0,245,212,0.06), rgba(0,180,216,0.04));
+    border: 1px solid rgba(0,245,212,0.2);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+  }
+  .global-strip-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--neon);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .global-platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .gp {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    padding: 5px 12px;
+    border-radius: 2px;
+    border: 1px solid rgba(0,245,212,0.3);
+    color: var(--neon);
+    background: rgba(0,245,212,0.05);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .gp:hover { background: rgba(0,245,212,0.12); border-color: var(--neon); }
+  .gp span { color: var(--muted); font-size: 9px; margin-left: 4px; }
+
+  /* SECTION HEADER */
+  .section-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-label::before, .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* DOMAINS GRID */
+  .domains-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 22px;
+  }
+
+  /* CARD */
+  .domain-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: fade-up 0.5s ease forwards;
+  }
+  @keyframes fade-up {
+    from { opacity:0; transform:translateY(22px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .domain-card:nth-child(1)  { animation-delay:.05s }
+  .domain-card:nth-child(2)  { animation-delay:.10s }
+  .domain-card:nth-child(3)  { animation-delay:.15s }
+  .domain-card:nth-child(4)  { animation-delay:.20s }
+  .domain-card:nth-child(5)  { animation-delay:.25s }
+  .domain-card:nth-child(6)  { animation-delay:.30s }
+  .domain-card:nth-child(7)  { animation-delay:.35s }
+  .domain-card:nth-child(8)  { animation-delay:.40s }
+  .domain-card:nth-child(9)  { animation-delay:.45s }
+  .domain-card:nth-child(10) { animation-delay:.50s }
+  .domain-card:nth-child(11) { animation-delay:.55s }
+  .domain-card:nth-child(12) { animation-delay:.60s }
+
+  .domain-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--cc);
+    box-shadow: 0 0 18px var(--cc);
+  }
+  .domain-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 22px; height: 22px;
+    border-bottom: 1px solid var(--cc);
+    border-right: 1px solid var(--cc);
+    opacity: 0.5;
+  }
+  .domain-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--cc);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--cc) 18%, transparent);
+  }
+
+  /* CARD HEADER */
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 18px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    font-size: 26px;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .card-title-block { flex: 1; }
+  .card-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--cc);
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+    opacity: .8;
+  }
+  .card-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .card-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8.5px;
+    padding: 3px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--cc);
+    color: var(--cc);
+    background: rgba(0,0,0,0.4);
+    white-space: nowrap;
+  }
+
+  /* TABS */
+  .card-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-btn {
+    flex: 1;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 4px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    position: relative;
+    bottom: -1px;
+  }
+  .tab-btn.active {
+    color: var(--cc);
+    border-bottom-color: var(--cc);
+  }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+
+  /* TAB CONTENT */
+  .tab-panel { display: none; padding: 14px 18px 18px; }
+  .tab-panel.active { display: block; }
+
+  /* TOPICS */
+  .topics-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .topic-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.5;
+    flex-direction: column;
+  }
+  .topic-item-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .topic-item-row::before {
+    content: '▸';
+    color: var(--cc);
+    font-size: 9px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    opacity: .8;
+  }
+  .topic-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    margin-top: 1px;
+    padding-left: 20px;
+  }
+
+  /* CERT PILLS */
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .pill {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    padding: 3px 7px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px;
+    color: var(--muted);
+    background: rgba(0,0,0,0.4);
+    transition: all 0.2s;
+  }
+  .domain-card:hover .pill {
+    border-color: color-mix(in srgb, var(--cc) 35%, transparent);
+    color: color-mix(in srgb, var(--cc) 75%, var(--text));
+  }
+
+  /* RESOURCES */
+  .resources-list { display: flex; flex-direction: column; gap: 8px; }
+  .resource-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 10px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 3px;
+    transition: border-color 0.2s;
+  }
+  .resource-item:hover { border-color: color-mix(in srgb, var(--cc) 35%, transparent); }
+  .resource-type {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .rt-yt   { background: rgba(255,0,0,0.2);    color: #ff6b6b;  border: 1px solid rgba(255,0,0,0.25); }
+  .rt-web  { background: rgba(0,245,212,0.1);   color: #00f5d4;  border: 1px solid rgba(0,245,212,0.25); }
+  .rt-lab  { background: rgba(57,255,20,0.1);   color: #39ff14;  border: 1px solid rgba(57,255,20,0.25); }
+  .rt-doc  { background: rgba(255,214,10,0.1);  color: #ffd60a;  border: 1px solid rgba(255,214,10,0.25); }
+  .rt-ctf  { background: rgba(247,37,133,0.1);  color: #f72585;  border: 1px solid rgba(247,37,133,0.25); }
+  .rt-course { background: rgba(123,47,255,0.15); color: #c77dff; border: 1px solid rgba(123,47,255,0.3); }
+  .resource-info { flex: 1; }
+  .resource-name {
+    font-size: 11.5px;
+    color: #ddf;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .resource-desc {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .resource-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--cc);
+    text-decoration: none;
+    opacity: .7;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: center;
+    transition: opacity 0.2s;
+  }
+  .resource-link:hover { opacity: 1; text-decoration: underline; }
+
+  /* DOMAIN COLORS */
+  .d1  { --cc: #00f5d4; }
+  .d2  { --cc: #00b4d8; }
+  .d3  { --cc: #f72585; }
+  .d4  { --cc: #ffd60a; }
+  .d5  { --cc: #7b2fff; }
+  .d6  { --cc: #39ff14; }
+  .d7  { --cc: #ff6b35; }
+  .d8  { --cc: #ff006e; }
+  .d9  { --cc: #48cae4; }
+  .d10 { --cc: #c77dff; }
+  .d11 { --cc: #80ffdb; }
+  .d12 { --cc: #ffb700; }
+
+  /* LEVELS */
+  .levels-section { margin: 0 0 44px; }
+  .levels-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 18px; }
+  .level-card { padding: 20px; }
+  .level-card:nth-child(1) { background:linear-gradient(135deg,rgba(0,245,212,.09),rgba(0,180,216,.04)); border:1px solid rgba(0,245,212,.25); }
+  .level-card:nth-child(2) { background:linear-gradient(135deg,rgba(247,37,133,.09),rgba(123,47,255,.04)); border:1px solid rgba(247,37,133,.25); }
+  .level-card:nth-child(3) { background:linear-gradient(135deg,rgba(255,214,10,.09),rgba(255,107,53,.04)); border:1px solid rgba(255,214,10,.25); }
+  .level-name { font-family:'Orbitron',monospace; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:10px; }
+  .level-card:nth-child(1) .level-name { color:var(--neon); }
+  .level-card:nth-child(2) .level-name { color:var(--accent); }
+  .level-card:nth-child(3) .level-name { color:var(--gold); }
+  .level-items { font-family:'Share Tech Mono',monospace; font-size:10.5px; color:var(--muted); line-height:1.9; }
+
+  /* FOOTER */
+  footer { text-align:center; margin-top:70px; font-family:'Share Tech Mono',monospace; font-size:10.5px; color:var(--muted); letter-spacing:2px; border-top:1px solid var(--border); padding-top:28px; }
+  .blink { animation:blink 1.2s step-end infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  @media(max-width:768px) {
+    .domains-grid { grid-template-columns:1fr; }
+    .levels-grid  { grid-template-columns:1fr; }
+    .global-platforms { gap:6px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<!-- HEADER -->
+<header>
+  <div class="header-badge">Complete Career & Learning Roadmap</div>
+  <h1>Cybersecurity<br>Domain Map</h1>
+  <p class="subtitle">// 12 DOMAINS · FREE LEARNING RESOURCES · SKILL PROGRESSION //</p>
+  <div class="header-line"></div>
+</header>
+
+<!-- GLOBAL FREE PLATFORMS -->
+<div class="global-strip">
+  <div class="global-strip-title">▸ Universal Free Platforms (Cover All Domains)</div>
+  <div class="global-platforms">
+    <a class="gp" href="https://tryhackme.com" target="_blank">TryHackMe <span>labs</span></a>
+    <a class="gp" href="https://hackthebox.com" target="_blank">Hack The Box <span>labs</span></a>
+    <a class="gp" href="https://cybrary.it" target="_blank">Cybrary <span>courses</span></a>
+    <a class="gp" href="https://letsdefend.io" target="_blank">LetsDefend <span>blue team</span></a>
+    <a class="gp" href="https://portswigger.net/web-security" target="_blank">PortSwigger Academy <span>web</span></a>
+    <a class="gp" href="https://www.coursera.org" target="_blank">Coursera (audit) <span>courses</span></a>
+    <a class="gp" href="https://www.edx.org" target="_blank">edX (audit) <span>courses</span></a>
+    <a class="gp" href="https://www.sans.org/cyberaces" target="_blank">SANS Cyber Aces <span>free</span></a>
+    <a class="gp" href="https://www.cisa.gov/resources-tools/training" target="_blank">CISA Learning <span>gov</span></a>
+    <a class="gp" href="https://picoctf.org" target="_blank">PicoCTF <span>beginner ctf</span></a>
+    <a class="gp" href="https://www.youtube.com/@TCMSecurityAcademy" target="_blank">TCM Security <span>youtube</span></a>
+    <a class="gp" href="https://www.youtube.com/@NetworkChuck" target="_blank">NetworkChuck <span>youtube</span></a>
+  </div>
+</div>
+
+<!-- PROGRESSION LEVELS -->
+<section class="levels-section">
+  <div class="section-label">Skill Progression Path</div>
+  <div class="levels-grid">
+    <div class="level-card">
+      <div class="level-name">▸ Foundational</div>
+      <div class="level-items">
+        Networking Fundamentals (OSI, TCP/IP)<br>
+        Linux & Windows Administration<br>
+        Basic Scripting (Python / Bash)<br>
+        CompTIA Security+ / CEH<br>
+        Cryptography Basics
+      </div>
+    </div>
+    <div class="level-card">
+      <div class="level-name">▸ Intermediate</div>
+      <div class="level-items">
+        SIEM / Log Analysis / SOAR<br>
+        Penetration Testing Basics<br>
+        Cloud Security Fundamentals<br>
+        Risk & Compliance Frameworks<br>
+        OSCP / eJPT / CySA+
+      </div>
+    </div>
+    <div class="level-card">
+      <div class="level-name">▸ Advanced</div>
+      <div class="level-items">
+        Red Team / Threat Emulation<br>
+        Malware Analysis & Reverse Engineering<br>
+        Zero Trust Architecture Design<br>
+        AI/ML in Security Operations<br>
+        CISSP / CISM / OSEP / OSED
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOMAINS -->
+<div class="section-label">All Domains · Topics + Free Resources</div>
+<div class="domains-grid">
+
+<!-- ══════════════════════════════════════════
+     1. NETWORK SECURITY
+══════════════════════════════════════════ -->
+<div class="domain-card d1">
+  <div class="card-header">
+    <div class="card-icon">🛡️</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 01</div>
+      <div class="card-title">Network Security</div>
+    </div>
+    <div class="card-tag">Foundational</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t1','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t1','resources')">Free Resources</button>
+  </div>
+  <div id="t1-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">Firewalls & NGFW (Palo Alto · Fortinet · Cisco ASA)</div></li>
+      <li class="topic-item"><div class="topic-item-row">IDS/IPS — Snort, Suricata, Zeek</div></li>
+      <li class="topic-item"><div class="topic-item-row">VPN & Secure Tunneling (IPSec · WireGuard · SSL/TLS)</div></li>
+      <li class="topic-item"><div class="topic-item-row">Network Segmentation & Micro-segmentation</div></li>
+      <li class="topic-item"><div class="topic-item-row">Zero Trust Network Access (ZTNA)</div></li>
+      <li class="topic-item"><div class="topic-item-row">Packet Analysis — Wireshark · Tcpdump · NetFlow</div></li>
+      <li class="topic-item"><div class="topic-item-row">DNS Security, DDoS Protection, NAC</div></li>
+    </ul>
+    <div class="pills"><span class="pill">CCNA Security</span><span class="pill">NSE 4</span><span class="pill">PCNSA</span><span class="pill">CompTIA Network+</span></div>
+  </div>
+  <div id="t1-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">Professor Messer (Network+)</div><div class="resource-desc">Free CompTIA Network+ video course — covers OSI, protocols, firewalls</div></div>
+        <a class="resource-link" href="https://www.professormesser.com" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">NetworkChuck (YouTube)</div><div class="resource-desc">Hands-on networking & Cisco labs, subnetting, firewalls explained visually</div></div>
+        <a class="resource-link" href="https://youtube.com/@NetworkChuck" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">Cisco Networking Academy (NetAcad)</div><div class="resource-desc">Free Introduction to Cybersecurity & CCNAv7 courses from Cisco</div></div>
+        <a class="resource-link" href="https://netacad.com" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">TryHackMe — Pre-Security Path</div><div class="resource-desc">Guided hands-on rooms on networking fundamentals, Wireshark, DNS</div></div>
+        <a class="resource-link" href="https://tryhackme.com/path/outline/presecurity" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-doc">DOC</span>
+        <div class="resource-info"><div class="resource-name">Wireshark Official Docs & Samples</div><div class="resource-desc">Free capture samples, user guide & filter references for packet analysis</div></div>
+        <a class="resource-link" href="https://wiki.wireshark.org/SampleCaptures" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     2. ENDPOINT SECURITY
+══════════════════════════════════════════ -->
+<div class="domain-card d2">
+  <div class="card-header">
+    <div class="card-icon">💻</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 02</div>
+      <div class="card-title">Endpoint Security</div>
+    </div>
+    <div class="card-tag">Core</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t2','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t2','resources')">Free Resources</button>
+  </div>
+  <div id="t2-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">EDR/XDR — CrowdStrike · SentinelOne · Defender XDR</div></li>
+      <li class="topic-item"><div class="topic-item-row">Anti-malware & Behavioral Analysis</div></li>
+      <li class="topic-item"><div class="topic-item-row">MDM — Intune · Jamf · VMware Workspace ONE</div></li>
+      <li class="topic-item"><div class="topic-item-row">Data Loss Prevention (DLP)</div></li>
+      <li class="topic-item"><div class="topic-item-row">Host Hardening (CIS Benchmarks)</div></li>
+      <li class="topic-item"><div class="topic-item-row">Patch Management — WSUS · Ivanti · Qualys Agent</div></li>
+      <li class="topic-item"><div class="topic-item-row">Application Whitelisting / AppLocker</div></li>
+    </ul>
+    <div class="pills"><span class="pill">CrowdStrike CCFA</span><span class="pill">SC-200</span><span class="pill">CySA+</span></div>
+  </div>
+  <div id="t2-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">Microsoft Learn — SC-200 Path</div><div class="resource-desc">Free Microsoft Defender & Sentinel training — endpoint, identity, cloud alerts</div></div>
+        <a class="resource-link" href="https://learn.microsoft.com/en-us/credentials/certifications/security-operations-analyst/" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-doc">DOC</span>
+        <div class="resource-info"><div class="resource-name">CIS Benchmarks (Free PDFs)</div><div class="resource-desc">Hardening guides for Windows, Linux, macOS, browsers — free download</div></div>
+        <a class="resource-link" href="https://www.cisecurity.org/cis-benchmarks" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">LetsDefend — Endpoint Security</div><div class="resource-desc">Blue-team SOC simulations with EDR alerts, malware triage hands-on labs</div></div>
+        <a class="resource-link" href="https://letsdefend.io" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-course">COURSE</span>
+        <div class="resource-info"><div class="resource-name">IBM SkillsBuild — Cybersecurity</div><div class="resource-desc">Free endpoint & threat detection courses with digital badges</div></div>
+        <a class="resource-link" href="https://skillsbuild.org/adults/digital-credentials/cybersecurity" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">John Hammond (YouTube)</div><div class="resource-desc">Malware analysis, threat hunting, EDR walkthroughs in real environments</div></div>
+        <a class="resource-link" href="https://youtube.com/@_JohnHammond" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     3. PRODUCT / APP SECURITY
+══════════════════════════════════════════ -->
+<div class="domain-card d3">
+  <div class="card-header">
+    <div class="card-icon">⚙️</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 03</div>
+      <div class="card-title">Product / App Security</div>
+    </div>
+    <div class="card-tag">High Demand</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t3','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t3','resources')">Free Resources</button>
+  </div>
+  <div id="t3-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">Secure SDLC & DevSecOps (Shift-Left Security)</div></li>
+      <li class="topic-item"><div class="topic-item-row">SAST/DAST/IAST/RASP — SonarQube · Checkmarx · Burp</div></li>
+      <li class="topic-item"><div class="topic-item-row">OWASP Top 10 & API Security Top 10</div></li>
+      <li class="topic-item"><div class="topic-item-row">Threat Modeling — STRIDE · PASTA · LINDDUN</div></li>
+      <li class="topic-item"><div class="topic-item-row">SCA — Snyk · FOSSA · Black Duck</div></li>
+      <li class="topic-item"><div class="topic-item-row">Container Security — Trivy · Falco · Aqua</div></li>
+      <li class="topic-item"><div class="topic-item-row">Secrets Management & Secure Code Review</div></li>
+    </ul>
+    <div class="pills"><span class="pill">CSSLP</span><span class="pill">GWEB</span><span class="pill">CASE</span><span class="pill">DevSecOps Pro</span></div>
+  </div>
+  <div id="t3-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">PortSwigger Web Security Academy</div><div class="resource-desc">100% free — labs on SQLi, XSS, IDOR, SSRF, OAuth, API attacks & more</div></div>
+        <a class="resource-link" href="https://portswigger.net/web-security" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-doc">DOC</span>
+        <div class="resource-info"><div class="resource-name">OWASP Foundation (Free Guides)</div><div class="resource-desc">Testing Guide, WSTG, Top 10, API Top 10 — all free PDFs and wiki</div></div>
+        <a class="resource-link" href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">DVWA / WebGoat / Juice Shop</div><div class="resource-desc">Free intentionally vulnerable apps to practice OWASP vulns locally</div></div>
+        <a class="resource-link" href="https://github.com/juice-shop/juice-shop" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-course">COURSE</span>
+        <div class="resource-info"><div class="resource-name">Snyk Learn</div><div class="resource-desc">Free interactive secure coding lessons in Python, Java, JS, Go, etc.</div></div>
+        <a class="resource-link" href="https://learn.snyk.io" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">Rana Khalil (YouTube)</div><div class="resource-desc">In-depth OWASP Top 10, web app security topics explained with demos</div></div>
+        <a class="resource-link" href="https://youtube.com/@RanaKhalil101" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     4. GRC
+══════════════════════════════════════════ -->
+<div class="domain-card d4">
+  <div class="card-header">
+    <div class="card-icon">📋</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 04</div>
+      <div class="card-title">Governance, Risk & Compliance</div>
+    </div>
+    <div class="card-tag">Strategic</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t4','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t4','resources')">Free Resources</button>
+  </div>
+  <div id="t4-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">Frameworks — ISO 27001 · NIST CSF · CIS Controls · COBIT</div></li>
+      <li class="topic-item"><div class="topic-item-row">Regulatory — GDPR · HIPAA · PCI-DSS · SOC 2 · DPDPA</div></li>
+      <li class="topic-item"><div class="topic-item-row">Risk Assessment — FAIR · OCTAVE · NIST RMF</div></li>
+      <li class="topic-item"><div class="topic-item-row">Security Policies, Standards & Procedures</div></li>
+      <li class="topic-item"><div class="topic-item-row">Third-Party & Vendor Risk Management</div></li>
+      <li class="topic-item"><div class="topic-item-row">BCP / DRP — Business Continuity & Disaster Recovery</div></li>
+      <li class="topic-item"><div class="topic-item-row">Audit Management & Evidence Collection</div></li>
+    </ul>
+    <div class="pills"><span class="pill">CISM</span><span class="pill">CRISC</span><span class="pill">CGRC</span><span class="pill">ISO 27001 LA</span><span class="pill">CISA</span></div>
+  </div>
+  <div id="t4-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-doc">DOC</span>
+        <div class="resource-info"><div class="resource-name">NIST Cybersecurity Framework (Free)</div><div class="resource-desc">Official NIST CSF 2.0 documentation, implementation guides, profiles</div></div>
+        <a class="resource-link" href="https://www.nist.gov/cyberframework" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-doc">DOC</span>
+        <div class="resource-info"><div class="resource-name">CIS Controls (Free Download)</div><div class="resource-desc">CIS Controls v8 — prioritized security controls, implementation groups</div></div>
+        <a class="resource-link" href="https://www.cisecurity.org/controls" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-course">COURSE</span>
+        <div class="resource-info"><div class="resource-name">CISA Learning (Free Gov Courses)</div><div class="resource-desc">Risk management, cloud security, cyber resilience — free public access</div></div>
+        <a class="resource-link" href="https://www.cisa.gov/resources-tools/training" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-course">COURSE</span>
+        <div class="resource-info"><div class="resource-name">Coursera — Google Cybersecurity Cert (Audit)</div><div class="resource-desc">GRC modules included; free to audit — risk frameworks, compliance basics</div></div>
+        <a class="resource-link" href="https://www.coursera.org/professional-certificates/google-cybersecurity" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">Inside Cloud and Security (YouTube)</div><div class="resource-desc">CISSP, CISM, GRC frameworks explained — free study sessions</div></div>
+        <a class="resource-link" href="https://youtube.com/@insidecloudandsecurity" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     5. VAPT
+══════════════════════════════════════════ -->
+<div class="domain-card d5">
+  <div class="card-header">
+    <div class="card-icon">🔍</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 05</div>
+      <div class="card-title">VAPT & Ethical Hacking</div>
+    </div>
+    <div class="card-tag">Offensive</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t5','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t5','resources')">Free Resources</button>
+  </div>
+  <div id="t5-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">Web App Pentesting — Burp Suite · SQLMap · XSStrike</div></li>
+      <li class="topic-item"><div class="topic-item-row">Network Pentesting — Nmap · Metasploit · Nessus</div></li>
+      <li class="topic-item"><div class="topic-item-row">API Penetration Testing</div></li>
+      <li class="topic-item"><div class="topic-item-row">Mobile Pentesting — MobSF · Frida · Drozer</div></li>
+      <li class="topic-item"><div class="topic-item-row">Social Engineering — GoPhish · SET · Evilginx2</div></li>
+      <li class="topic-item"><div class="topic-item-row">Active Directory Attacks — BloodHound · Mimikatz · Impacket</div></li>
+      <li class="topic-item"><div class="topic-item-row">Report Writing & Remediation Guidance</div></li>
+    </ul>
+    <div class="pills"><span class="pill">OSCP</span><span class="pill">CEH</span><span class="pill">eJPT</span><span class="pill">GPEN</span><span class="pill">PNPT</span><span class="pill">BSCP</span></div>
+  </div>
+  <div id="t5-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">Hack The Box (Free Tier)</div><div class="resource-desc">Realistic pentesting machines — network, web, AD attack labs</div></div>
+        <a class="resource-link" href="https://hackthebox.com" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">TryHackMe — Jr Penetration Tester</div><div class="resource-desc">Structured free path covering Metasploit, Nmap, Burp, web vulns</div></div>
+        <a class="resource-link" href="https://tryhackme.com/path/outline/jrpenetrationtester" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-course">COURSE</span>
+        <div class="resource-info"><div class="resource-name">TCM Security Free YouTube Course</div><div class="resource-desc">Full Practical Ethical Hacking course on YouTube — 15+ hrs free</div></div>
+        <a class="resource-link" href="https://youtube.com/@TCMSecurityAcademy" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-ctf">CTF</span>
+        <div class="resource-info"><div class="resource-name">PicoCTF / CTFtime.org</div><div class="resource-desc">Free beginner-to-advanced CTF challenges covering all pentesting domains</div></div>
+        <a class="resource-link" href="https://picoctf.org" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">Bugcrowd University</div><div class="resource-desc">Free bug bounty learning — recon, web vulns, report writing modules</div></div>
+        <a class="resource-link" href="https://university.bugcrowd.com" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     6. CLOUD SECURITY
+══════════════════════════════════════════ -->
+<div class="domain-card d6">
+  <div class="card-header">
+    <div class="card-icon">☁️</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 06</div>
+      <div class="card-title">Cloud Security</div>
+    </div>
+    <div class="card-tag">High Growth</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t6','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t6','resources')">Free Resources</button>
+  </div>
+  <div id="t6-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">CSPM — Wiz · Prisma Cloud · AWS Security Hub</div></li>
+      <li class="topic-item"><div class="topic-item-row">CWPP — Cloud Workload Protection</div></li>
+      <li class="topic-item"><div class="topic-item-row">Cloud IAM — AWS · Azure AD · GCP IAM</div></li>
+      <li class="topic-item"><div class="topic-item-row">Serverless & Container Security</div></li>
+      <li class="topic-item"><div class="topic-item-row">Cloud Network Security — VPC · WAF · Security Groups</div></li>
+      <li class="topic-item"><div class="topic-item-row">Shared Responsibility Model & Cloud Compliance</div></li>
+      <li class="topic-item"><div class="topic-item-row">Cloud Pentesting — ScoutSuite · Pacu · CloudSploit</div></li>
+    </ul>
+    <div class="pills"><span class="pill">AWS Security</span><span class="pill">CCSP</span><span class="pill">CCSK</span><span class="pill">AZ-500</span></div>
+  </div>
+  <div id="t6-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">AWS Skill Builder (Free Tier)</div><div class="resource-desc">AWS Cloud Practitioner, Security Fundamentals, IAM courses — free</div></div>
+        <a class="resource-link" href="https://explore.skillbuilder.aws" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">Microsoft Learn — AZ-500 Path</div><div class="resource-desc">Free Azure Security Engineer training — identity, platform, data security</div></div>
+        <a class="resource-link" href="https://learn.microsoft.com/en-us/credentials/certifications/azure-security-engineer/" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-doc">DOC</span>
+        <div class="resource-info"><div class="resource-name">Cloud Security Alliance (CSA)</div><div class="resource-desc">Free CCSK study guide, cloud controls matrix, security guidance docs</div></div>
+        <a class="resource-link" href="https://cloudsecurityalliance.org/research/guidance" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">flaws.cloud / flaws2.cloud</div><div class="resource-desc">Free AWS security challenge labs — misconfiguration, IAM abuse, S3 leaks</div></div>
+        <a class="resource-link" href="http://flaws.cloud" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">Cloud Security Podcast (YouTube)</div><div class="resource-desc">Weekly cloud security insights, AWS/Azure/GCP threat analysis</div></div>
+        <a class="resource-link" href="https://youtube.com/@CloudSecurityPodcast" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     7. SOC & THREAT INTELLIGENCE
+══════════════════════════════════════════ -->
+<div class="domain-card d7">
+  <div class="card-header">
+    <div class="card-icon">🎯</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 07</div>
+      <div class="card-title">SOC & Threat Intelligence</div>
+    </div>
+    <div class="card-tag">Defensive</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t7','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t7','resources')">Free Resources</button>
+  </div>
+  <div id="t7-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">SIEM — Splunk · Microsoft Sentinel · QRadar · Elastic</div></li>
+      <li class="topic-item"><div class="topic-item-row">SOAR — XSOAR · Splunk SOAR · IBM Resilient</div></li>
+      <li class="topic-item"><div class="topic-item-row">Incident Detection, Triage & Response (L1/L2/L3)</div></li>
+      <li class="topic-item"><div class="topic-item-row">Threat Hunting & UEBA</div></li>
+      <li class="topic-item"><div class="topic-item-row">CTI — MITRE ATT&CK · STIX/TAXII · OpenCTI</div></li>
+      <li class="topic-item"><div class="topic-item-row">Log Management & Correlation Rules</div></li>
+      <li class="topic-item"><div class="topic-item-row">KPIs: MTTD / MTTR / Alert Fatigue</div></li>
+    </ul>
+    <div class="pills"><span class="pill">Splunk Core</span><span class="pill">GCTI</span><span class="pill">SC-200</span><span class="pill">BTL1</span><span class="pill">GCIA</span></div>
+  </div>
+  <div id="t7-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">MITRE ATT&CK Navigator</div><div class="resource-desc">Free framework & navigator tool — TTP mapping, threat intel, detection logic</div></div>
+        <a class="resource-link" href="https://attack.mitre.org" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">LetsDefend — SOC Analyst Path</div><div class="resource-desc">Full free SOC analyst simulation — SIEM alerts, phishing analysis, triage</div></div>
+        <a class="resource-link" href="https://letsdefend.io" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-course">COURSE</span>
+        <div class="resource-info"><div class="resource-name">Splunk Free Training (Fundamentals 1)</div><div class="resource-desc">Free Splunk Core Certified User course — searching, dashboards, SPL basics</div></div>
+        <a class="resource-link" href="https://www.splunk.com/en_us/training/free-courses/splunk-fundamentals-1.html" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">Elastic SIEM Free (Elastic Cloud Trial)</div><div class="resource-desc">Spin up Elastic SIEM, practice detection rules on free trial cluster</div></div>
+        <a class="resource-link" href="https://www.elastic.co/security" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">CIRCL (OpenCTI / MISP) Free Setup</div><div class="resource-desc">Free open-source CTI platforms to practice intel sharing & IOC management</div></div>
+        <a class="resource-link" href="https://www.circl.lu/services/misp-malware-information-sharing-platform/" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     8. IAM
+══════════════════════════════════════════ -->
+<div class="domain-card d8">
+  <div class="card-header">
+    <div class="card-icon">🔑</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 08</div>
+      <div class="card-title">Identity & Access Management</div>
+    </div>
+    <div class="card-tag">Core</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t8','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t8','resources')">Free Resources</button>
+  </div>
+  <div id="t8-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">SSO & Federation — SAML · OAuth 2.0 · OIDC · Okta</div></li>
+      <li class="topic-item"><div class="topic-item-row">MFA & Passwordless Authentication</div></li>
+      <li class="topic-item"><div class="topic-item-row">PAM — CyberArk · BeyondTrust · Delinea</div></li>
+      <li class="topic-item"><div class="topic-item-row">Active Directory / Entra ID Security</div></li>
+      <li class="topic-item"><div class="topic-item-row">RBAC / ABAC Access Control Models</div></li>
+      <li class="topic-item"><div class="topic-item-row">Identity Governance & Administration (IGA)</div></li>
+      <li class="topic-item"><div class="topic-item-row">Zero Trust Identity (Never Trust, Always Verify)</div></li>
+    </ul>
+    <div class="pills"><span class="pill">SC-300</span><span class="pill">Okta Certified</span><span class="pill">CPAM</span><span class="pill">CyberArk Defender</span></div>
+  </div>
+  <div id="t8-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">Microsoft Learn — SC-300 (Entra ID)</div><div class="resource-desc">Free Azure AD / Entra ID identity management, SSO, MFA, Conditional Access</div></div>
+        <a class="resource-link" href="https://learn.microsoft.com/en-us/credentials/certifications/identity-and-access-administrator/" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">TryHackMe — Active Directory</div><div class="resource-desc">Free AD rooms — structure, enumeration, Kerberos attacks, hardening</div></div>
+        <a class="resource-link" href="https://tryhackme.com/module/active-directory" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-course">COURSE</span>
+        <div class="resource-info"><div class="resource-name">Okta Developer (Free Account)</div><div class="resource-desc">Free Okta tenant to practice SSO, MFA, OAuth flows, and app integrations</div></div>
+        <a class="resource-link" href="https://developer.okta.com" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">Andy Malone MVP (YouTube)</div><div class="resource-desc">Microsoft 365 identity, Entra ID, Zero Trust concepts — free video series</div></div>
+        <a class="resource-link" href="https://youtube.com/@AndyMaloneMVP" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     9. DFIR
+══════════════════════════════════════════ -->
+<div class="domain-card d9">
+  <div class="card-header">
+    <div class="card-icon">🔬</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 09</div>
+      <div class="card-title">DFIR</div>
+    </div>
+    <div class="card-tag">Investigative</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t9','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t9','resources')">Free Resources</button>
+  </div>
+  <div id="t9-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">Incident Response Lifecycle (NIST SP 800-61)</div></li>
+      <li class="topic-item"><div class="topic-item-row">Digital Forensics — Autopsy · FTK · Volatility · Velociraptor</div></li>
+      <li class="topic-item"><div class="topic-item-row">Malware Analysis — Ghidra · IDA Free · Cuckoo · Any.run</div></li>
+      <li class="topic-item"><div class="topic-item-row">Chain of Custody & Legal Evidence Handling</div></li>
+      <li class="topic-item"><div class="topic-item-row">Ransomware Response & Recovery</div></li>
+      <li class="topic-item"><div class="topic-item-row">Threat Eradication & Post-Incident Review</div></li>
+      <li class="topic-item"><div class="topic-item-row">Memory & Disk Forensics Techniques</div></li>
+    </ul>
+    <div class="pills"><span class="pill">GCFE</span><span class="pill">GCFA</span><span class="pill">GCIH</span><span class="pill">CHFI</span><span class="pill">GREM</span></div>
+  </div>
+  <div id="t9-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">CyberDefenders (Free Labs)</div><div class="resource-desc">DFIR blue-team challenges — PCAP, memory dumps, disk images for practice</div></div>
+        <a class="resource-link" href="https://cyberdefenders.org" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-doc">DOC</span>
+        <div class="resource-info"><div class="resource-name">Ghidra (Free NSA Tool)</div><div class="resource-desc">Free open-source reverse engineering suite from NSA — with free tutorials</div></div>
+        <a class="resource-link" href="https://ghidra-sre.org" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">DFIR.training & Digital Corpora</div><div class="resource-desc">Free forensics challenges, sample disk images, memory dumps for practice</div></div>
+        <a class="resource-link" href="https://dfir.training" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">13Cubed (YouTube)</div><div class="resource-desc">Deep-dive DFIR videos — memory forensics, Volatility, Windows artifacts</div></div>
+        <a class="resource-link" href="https://youtube.com/@13Cubed" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">Any.run Free Sandbox</div><div class="resource-desc">Free interactive malware sandbox — analyze suspicious files online</div></div>
+        <a class="resource-link" href="https://any.run" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     10. RED TEAM
+══════════════════════════════════════════ -->
+<div class="domain-card d10">
+  <div class="card-header">
+    <div class="card-icon">⚔️</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 10</div>
+      <div class="card-title">Red Team & Adversary Simulation</div>
+    </div>
+    <div class="card-tag">Advanced</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t10','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t10','resources')">Free Resources</button>
+  </div>
+  <div id="t10-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">Red Team Operations & OPSEC Fundamentals</div></li>
+      <li class="topic-item"><div class="topic-item-row">C2 Frameworks — Cobalt Strike · Sliver · Havoc · Brute Ratel</div></li>
+      <li class="topic-item"><div class="topic-item-row">MITRE ATT&CK Emulation Plans</div></li>
+      <li class="topic-item"><div class="topic-item-row">Physical Penetration Testing</div></li>
+      <li class="topic-item"><div class="topic-item-row">Purple Teaming & Adversarial Collaboration</div></li>
+      <li class="topic-item"><div class="topic-item-row">AV / EDR Bypass Techniques</div></li>
+      <li class="topic-item"><div class="topic-item-row">Custom Exploit Development — OSEP · OSED · OSCE3</div></li>
+    </ul>
+    <div class="pills"><span class="pill">OSCP</span><span class="pill">CRTO</span><span class="pill">CRTE</span><span class="pill">OSEP</span><span class="pill">GXPN</span></div>
+  </div>
+  <div id="t10-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">Hack The Box Pro Labs (Free Machines)</div><div class="resource-desc">Free HTB machines for AD attacks, lateral movement, C2 practice</div></div>
+        <a class="resource-link" href="https://hackthebox.com" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-doc">DOC</span>
+        <div class="resource-info"><div class="resource-name">MITRE ATT&CK Emulation Plans</div><div class="resource-desc">Free APT emulation plans (FIN6, APT3, APT29) from MITRE Engenuity</div></div>
+        <a class="resource-link" href="https://github.com/center-for-threat-informed-defense/adversary_emulation_library" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">Sliver C2 (Free Open Source)</div><div class="resource-desc">Free open-source C2 framework to learn adversary simulation concepts</div></div>
+        <a class="resource-link" href="https://github.com/BishopFox/sliver" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">S3cur3Th1sSh1t / The Cyber Mentor (YouTube)</div><div class="resource-desc">Red team tactics, AD exploitation, OSCP prep — all free on YouTube</div></div>
+        <a class="resource-link" href="https://youtube.com/@TCMSecurityAcademy" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-doc">DOC</span>
+        <div class="resource-info"><div class="resource-name">PayloadsAllTheThings (GitHub)</div><div class="resource-desc">Free cheat sheets — AD, web, Windows, Linux, cloud attack techniques</div></div>
+        <a class="resource-link" href="https://github.com/swisskyrepo/PayloadsAllTheThings" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     11. OT / ICS / IoT
+══════════════════════════════════════════ -->
+<div class="domain-card d11">
+  <div class="card-header">
+    <div class="card-icon">🏭</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 11</div>
+      <div class="card-title">OT / ICS / IoT Security</div>
+    </div>
+    <div class="card-tag">Specialized</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t11','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t11','resources')">Free Resources</button>
+  </div>
+  <div id="t11-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">ICS/SCADA Architecture — HMI · PLC · DCS</div></li>
+      <li class="topic-item"><div class="topic-item-row">OT Protocols — Modbus · DNP3 · IEC 61850 · Profinet</div></li>
+      <li class="topic-item"><div class="topic-item-row">ICS Security Frameworks — IEC 62443 · NERC CIP · NIST 800-82</div></li>
+      <li class="topic-item"><div class="topic-item-row">OT Monitoring — Claroty · Dragos · Nozomi Networks</div></li>
+      <li class="topic-item"><div class="topic-item-row">IoT Device Security & Firmware Analysis</div></li>
+      <li class="topic-item"><div class="topic-item-row">Purdue Model & IT/OT Convergence Security</div></li>
+      <li class="topic-item"><div class="topic-item-row">OT Incident Response & Air-Gap Environments</div></li>
+    </ul>
+    <div class="pills"><span class="pill">GICSP</span><span class="pill">GRID</span><span class="pill">IEC 62443 Expert</span><span class="pill">CSSA</span></div>
+  </div>
+  <div id="t11-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-course">COURSE</span>
+        <div class="resource-info"><div class="resource-name">CISA ICS Security Training (Free)</div><div class="resource-desc">Free ICS-CERT training — 100+ courses on SCADA, ICS defense, cyber resilience</div></div>
+        <a class="resource-link" href="https://ics-cert.us-cert.gov/Training-Available-Through-ICS-CERT" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">Idaho National Lab CyberCore</div><div class="resource-desc">Free OT/ICS learning resources and virtual labs for critical infrastructure</div></div>
+        <a class="resource-link" href="https://inl.gov/national-security/cyber-security/" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-doc">DOC</span>
+        <div class="resource-info"><div class="resource-name">NIST SP 800-82 Rev 3 (Free)</div><div class="resource-desc">Free ICS/OT security guide from NIST — architecture, threats, controls</div></div>
+        <a class="resource-link" href="https://csrc.nist.gov/publications/detail/sp/800-82/rev-3/final" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">SamuraiSTFU / GRFICSv2 (GitHub)</div><div class="resource-desc">Free virtual ICS/SCADA testbed for OT attack & defense practice</div></div>
+        <a class="resource-link" href="https://github.com/dmolchanenko/GRFICSv2" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">Dragos YouTube Channel</div><div class="resource-desc">Free ICS/OT threat intelligence talks, incident analysis, defense strategies</div></div>
+        <a class="resource-link" href="https://youtube.com/@DragosInc" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     12. SECURITY AWARENESS
+══════════════════════════════════════════ -->
+<div class="domain-card d12">
+  <div class="card-header">
+    <div class="card-icon">🧠</div>
+    <div class="card-title-block">
+      <div class="card-num">DOMAIN 12</div>
+      <div class="card-title">Security Awareness & Human Risk</div>
+    </div>
+    <div class="card-tag">People-Centric</div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t12','topics')">Topics</button>
+    <button class="tab-btn" onclick="switchTab(this,'t12','resources')">Free Resources</button>
+  </div>
+  <div id="t12-topics" class="tab-panel active">
+    <ul class="topics-list">
+      <li class="topic-item"><div class="topic-item-row">Security Awareness Training Program Design</div></li>
+      <li class="topic-item"><div class="topic-item-row">Phishing Simulation — KnowBe4 · Proofpoint · Cofense</div></li>
+      <li class="topic-item"><div class="topic-item-row">Social Engineering Psychology & Pretexting</div></li>
+      <li class="topic-item"><div class="topic-item-row">Insider Threat Programs & UEBA</div></li>
+      <li class="topic-item"><div class="topic-item-row">Human Risk Metrics & Reporting</div></li>
+      <li class="topic-item"><div class="topic-item-row">Security Culture Building & Gamification</div></li>
+      <li class="topic-item"><div class="topic-item-row">Executive & Board-Level Communication</div></li>
+    </ul>
+    <div class="pills"><span class="pill">SSAP</span><span class="pill">CISM</span><span class="pill">KnowBe4 Certified</span><span class="pill">Security+</span></div>
+  </div>
+  <div id="t12-resources" class="tab-panel">
+    <div class="resources-list">
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">KnowBe4 Free Resources</div><div class="resource-desc">Free phishing security tests, awareness kits, email templates, posters</div></div>
+        <a class="resource-link" href="https://www.knowbe4.com/free-cybersecurity-awareness-training" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-web">WEB</span>
+        <div class="resource-info"><div class="resource-name">NCSA / StaySafeOnline (Free)</div><div class="resource-desc">National Cybersecurity Alliance — free toolkits, awareness resources, tips</div></div>
+        <a class="resource-link" href="https://staysafeonline.org" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-lab">LAB</span>
+        <div class="resource-info"><div class="resource-name">GoPhish (Free Open Source)</div><div class="resource-desc">Free phishing simulation framework — build & run your own campaigns</div></div>
+        <a class="resource-link" href="https://getgophish.com" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-course">COURSE</span>
+        <div class="resource-info"><div class="resource-name">SANS Security Awareness (Free Content)</div><div class="resource-desc">Free awareness tip sheets, newsletters, posters — SANS free resources page</div></div>
+        <a class="resource-link" href="https://www.sans.org/security-awareness-training/resources/" target="_blank">→ visit</a>
+      </div>
+      <div class="resource-item">
+        <span class="resource-type rt-yt">YT</span>
+        <div class="resource-info"><div class="resource-name">Social-Engineer.org Podcast & Blog</div><div class="resource-desc">Free content on social engineering, human manipulation, awareness defense</div></div>
+        <a class="resource-link" href="https://www.social-engineer.org" target="_blank">→ visit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end domains-grid -->
+
+<footer>
+  <p>CYBERSECURITY ROADMAP · 12 DOMAINS · FREE LEARNING RESOURCES<span class="blink">_</span></p>
+  <p style="margin-top:8px;font-size:9.5px;color:#1a3a50;">ALL RESOURCES LISTED ARE FREE OR FREE-TO-AUDIT · CLICK CARDS TO EXPLORE TOPICS & RESOURCES</p>
+</footer>
+</div>
+
+<script>
+function switchTab(btn, cardId, panel) {
+  const card = btn.closest('.domain-card');
+  card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(cardId + '-' + panel).classList.add('active');
+}
+</script>
+</body>
+</html>
